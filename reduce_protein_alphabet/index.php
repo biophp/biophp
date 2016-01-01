@@ -502,6 +502,7 @@ function reduce_alphabet($seq,$type){
                 $seq=strtoupper($seq);
                 return $seq;
         }
+    return '';
 }
 
 // #######################################################################
@@ -574,6 +575,7 @@ function color_custom($seq,$seq2,$custom_alphabet){
         );
 
         // asign colors to the array
+        $letters = array();
         foreach($a as $key=> $val){
                 // assigment of color
                 $letters[$val]=$generic_colors[$key];
@@ -619,35 +621,27 @@ function  print_info(){
     may be displayed with a distinct colour (without applying reductions).
     <p>
     The reduced aminoacid alphabets has been obtained from the references bellow:
-
-    <font size=-1>
-    <p style="margin-left: 40px;">
     Li T, Fan K, Wang J, Wang W. Reduction of protein sequence
     complexity by residue grouping. Protein Eng 2003; 5:323-330.
     <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=12826723&dopt=Abstract">PubMed</a>
-    <p style="margin-left: 40px;">
     Murphy LR, Wallqvist A, Levy RM. Simplified amino acid alphabets
     for protein fold recognition and implications for folding.
     Protein Eng 2000; 13:149-152.
     <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=10775656&dopt=Abstract">PubMed</a>
-    <p style="margin-left: 40px;">
     Pommi&eacute; C, Levadoux S, Sabatier R, Lefranc G & Lefranc MP.
     IMGT standardized criteria for statistical analysis of immunoglobulin
     V-REGION amino acid properties. Journal of Molecular Recognition 2004; 17:17-32.
     <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=14872534&dopt=Abstract">PubMed</a>
-    <p style="margin-left: 40px;">
     Spitzer M, Fuellen G, Cullen P, Lorkowski S.
     VisCoSe: visualization and comparison of consensus sequences.
     Bioinformatics 2004; 20:433-435.
     <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=14960475&dopt=Abstract">PubMed</a>,
     <a href=http://viscose.ifg.uni-muenster.de/html/alphabets.html>Web</a>
-    <p style="margin-left: 40px;">
     Wang J, Wang W. A computational approach to simplifying the protein
     folding alphabet. Nat Struct Biol 1999; 11:1033-1038. <a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&list_uids=10542095&dopt=Abstract">PubMed</a>
-    </font>
     <p>The script has been created entirely with PHP scripting language, and source code is available at
-    <a href=http://www.biophp.org/minitools/reduce_protein_alphabet>BioPHP.org</a></center>
-    <?
+    <a href=http://www.biophp.org/minitools/reduce_protein_alphabet>BioPHP.org</a></p>
+<?
 }
 // #######################################################################
 // ########################   END FUNCTIONS   ############################
@@ -663,18 +657,16 @@ if($aaperline==""){$aaperline=100;}
 // ########################    PRINT FORM     ############################
 // #######################################################################
 ?>
-</pre>
-</td></tr>
 <tr><td>
 
-<form method=post value=<? print $_SERVER["PHP_SELF"]; ?>>
+<form method=post name=<? print $_SERVER["PHP_SELF"]; ?>>
         <b>Sequence:</b>
         <br>
         <textarea name=seq cols=75 rows=10><?= $seq; ?></textarea>
 
         <br>
         <input type=radio name=mode value=pre<? if ($_POST["mode"]!="custom"){print " checked";} ?>> Select Reduced alphabet
-        <br>&nbsp;&nbsp;&nbsp;<select name=type>
+        <br>&nbsp;&nbsp;&nbsp;<select name="type">
         <option value="">Select Reduced alphabet
         <option value=2<? if ($type=="20"){print " selected";} ?>>Do not reduced
         <option value=2<? if ($type=="2"){print " selected";} ?>>Hydrophilic/Hydrophobic
